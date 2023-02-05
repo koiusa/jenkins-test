@@ -10,7 +10,8 @@ pip install -r requirements.txt'''
 
     stage('Test') {
       steps {
-        sh 'python3 app.py'
+        sh '''cd app
+python3 app.py'''
       }
     }
 
