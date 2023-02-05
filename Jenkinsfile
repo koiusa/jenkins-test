@@ -3,14 +3,16 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        sh '''cd app
+        sh '''echo "building..."
+cd app
 pip install -r requirements.txt'''
       }
     }
 
     stage('Test') {
       steps {
-        sh '''cd app
+        sh '''echo "testing..."
+cd app
 python3 app.py'''
       }
     }
