@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Git Clone') {
       steps {
-        sh 'git clone https://github.com/koiusa/jenkins-test.git'
+        sh '''cd app
+pip install -r requirements.txt'''
       }
     }
 
