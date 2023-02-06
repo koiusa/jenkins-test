@@ -1,4 +1,8 @@
 # jenkins-test
-jenkins-test
 
-個人的なテスト用
+
+## docker-compose up
+
+```
+./compose.sh
+```
