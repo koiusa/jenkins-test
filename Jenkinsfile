@@ -9,11 +9,23 @@ cd app
       }
     }
 
-    stage('') {
-      steps {
-        sh '''cd app
+    stage('error') {
+      parallel {
+        stage('error') {
+          steps {
+            sh '''cd app
 echo "hello world"
 '''
+          }
+        }
+
+        stage('Compose') {
+          steps {
+            sh '''cd jenkins
+./compose.sh'''
+          }
+        }
+
       }
     }
 
