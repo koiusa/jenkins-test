@@ -9,22 +9,11 @@ cd app
       }
     }
 
-    stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh '''echo "testing"
-cd app
-python3 app.py'''
-          }
-        }
-
-        stage('error') {
-          steps {
-            sh 'python3 helloworld.py'
-          }
-        }
-
+    stage('') {
+      steps {
+        sh '''cd app
+echo "hello world"
+'''
       }
     }
 
