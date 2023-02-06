@@ -19,7 +19,7 @@ python3 app.py'''
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
             sh 'python3 helloworld.py'
           }
