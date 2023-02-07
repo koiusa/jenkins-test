@@ -13,7 +13,7 @@ pipeline {
 uname
 cat /etc/*release
 
-apt install sudo
+apt update && apt install sudo
 cd app
 ls
 sudo pip install -r requirements.txt'''
