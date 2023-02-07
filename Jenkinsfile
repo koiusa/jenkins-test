@@ -48,7 +48,7 @@ python3 ./helloworld.py'''
 #echo ${env.BUILD_URL}
 #echo ${currentBuild.currentResult}
 #echo ${JOB_NAME}'''
-        discordSend(description: 'Jenkins Pipeline Build', footer: 'Footer Text', webhookURL: WEBHOOK)
+        discordSend(description: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:  Check console output at $BUILD_URL to view the results.', webhookURL: WEBHOOK)
       }
     }
 
