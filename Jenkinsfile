@@ -19,7 +19,7 @@ pipeline {
           steps {
             sh '''cd app
 ls
-app.py
+python3 ./app.py
 '''
           }
         }
@@ -27,7 +27,7 @@ app.py
         stage('Compose') {
           steps {
             sh '''cd app
-./helloworld.sh'''
+python3 ./helloworld.sh'''
           }
         }
 
