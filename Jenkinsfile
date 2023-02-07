@@ -44,7 +44,9 @@ python3 ./helloworld.py'''
 
     stage('Deploy') {
       steps {
-        sh 'echo "Deploy"'
+        sh '''echo "Deploy"
+
+discordSend description: "Jenkins Pipeline Build", footer: "Footer Text", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: secrets.WEBHOOK '''
       }
     }
 
