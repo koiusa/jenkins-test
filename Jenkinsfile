@@ -2,31 +2,32 @@ pipeline {
   agent {
     docker {
       image 'python:3.6'
+      args '-u root'
     }
 
   }
   stages {
-    stage('Git Clone') {
+    stage('Build') {
       steps {
         sh '''echo "building"
 cd app
-ls'''
+ls
+sudo pip install -r requirements.txt'''
       }
     }
 
     stage('error') {
       parallel {
-        stage('Python') {
+        stage('Test') {
           steps {
             sh '''cd app
 ls
-sudo pip install -r requirements.txt
 python3 ./app.py
 '''
           }
         }
 
-        stage('python') {
+        stage('Sample') {
           steps {
             sh '''cd app
 ls
