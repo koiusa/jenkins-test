@@ -10,7 +10,7 @@ pipeline {
       steps {
         sh '''echo "building"
 cd app
-pip install -r requirements.txt'''
+ls'''
       }
     }
 
@@ -20,6 +20,7 @@ pip install -r requirements.txt'''
           steps {
             sh '''cd app
 ls
+pip install -r requirements.txt
 python3 ./app.py
 '''
           }
