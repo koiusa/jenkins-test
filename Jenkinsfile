@@ -48,7 +48,7 @@ python3 ./helloworld.py'''
 #echo ${env.BUILD_URL}
 #echo ${currentBuild.currentResult}
 #echo ${JOB_NAME}'''
-        discordSend(description: BUILD_RESULT, footer: 'Footer Text', webhookURL: WEBHOOK)
+        discordSend(description: BUILD_RESULT, footer: 'completed', webhookURL: WEBHOOK)
       }
     }
 
