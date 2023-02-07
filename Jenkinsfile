@@ -12,7 +12,6 @@ pipeline {
         sh '''echo "building"
 uname
 cat /etc/*release
-cat /etc/*version
 
 cd app
 ls
