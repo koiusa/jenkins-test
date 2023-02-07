@@ -9,13 +9,14 @@ pipeline {
     stage('Git Clone') {
       steps {
         sh '''echo "building"
-#pip install -r requirements.txt'''
+cd app
+pip install -r requirements.txt'''
       }
     }
 
     stage('error') {
       parallel {
-        stage('error') {
+        stage('Python') {
           steps {
             sh '''cd app
 ls
@@ -24,10 +25,11 @@ python3 ./app.py
           }
         }
 
-        stage('Compose') {
+        stage('python') {
           steps {
             sh '''cd app
-python3 ./helloworld.sh'''
+ls
+python3 ./helloworld.py'''
           }
         }
 
