@@ -9,7 +9,6 @@ pipeline {
     stage('Git Clone') {
       steps {
         sh '''echo "building"
-cd app
 #pip install -r requirements.txt'''
       }
     }
