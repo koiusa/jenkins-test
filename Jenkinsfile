@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'python:3.6'
+    }
+
+  }
   stages {
     stage('Git Clone') {
       steps {
@@ -14,15 +19,15 @@ cd app
         stage('error') {
           steps {
             sh '''cd app
-echo "hello world"
+app.py
 '''
           }
         }
 
         stage('Compose') {
           steps {
-            sh '''cd jenkins
-./compose.sh'''
+            sh '''cd app
+./helloworld.sh'''
           }
         }
 
