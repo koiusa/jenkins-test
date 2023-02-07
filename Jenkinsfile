@@ -20,7 +20,7 @@ ls'''
           steps {
             sh '''cd app
 ls
-pip install -r requirements.txt
+sudo pip install -r requirements.txt
 python3 ./app.py
 '''
           }
