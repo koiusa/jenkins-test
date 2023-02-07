@@ -18,6 +18,7 @@ pipeline {
         stage('error') {
           steps {
             sh '''cd app
+ls
 app.py
 '''
           }
