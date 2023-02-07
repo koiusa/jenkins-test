@@ -10,6 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''echo "building"
+who
 cd app
 ls
 sudo pip install -r requirements.txt'''
