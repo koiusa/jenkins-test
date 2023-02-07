@@ -20,9 +20,9 @@ sudo pip install -r requirements.txt'''
       }
     }
 
-    stage('error') {
+    stage('Test') {
       parallel {
-        stage('Test') {
+        stage('App') {
           steps {
             sh '''cd app
 ls
@@ -31,7 +31,7 @@ python3 ./app.py
           }
         }
 
-        stage('Sample') {
+        stage('HelloWorld') {
           steps {
             sh '''cd app
 ls
@@ -39,6 +39,12 @@ python3 ./helloworld.py'''
           }
         }
 
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        sh 'echo "Deploy"'
       }
     }
 
