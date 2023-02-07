@@ -20,9 +20,11 @@ cd path/to/jenkins-test/jenkins
 PipeLlneのDeploy処理でDiscordへ通知をしているので、環境変数を設定する
 
 ```
-discordSend(description: 'Jenkins Pipeline Build', footer: 'Footer Text', webhookURL: WEBHOOK)
+discordSend(description: BUILD_RESULT, footer: 'completed', webhookURL: WEBHOOK)
 ```
 
 ダッシュボード>Jenkinsの管理>システムの設定
 
 ![jenkinsENV](https://user-images.githubusercontent.com/71818379/217328882-5823e086-9c8b-421b-8f46-d1bfa80ea348.jpg)
+
+![buildcaption](https://user-images.githubusercontent.com/71818379/217335397-305e713d-5f1b-4b9d-99c8-bc9372440516.jpg)
