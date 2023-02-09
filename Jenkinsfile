@@ -53,11 +53,7 @@ echo ${BUILD_STATUS}'''
            　　 discordSend(description: BUILD_RESULT, footer: 'failure', webhookURL: WEBHOOK)
         　　　}
     　　}
-        post {
-            success {
-               discordSend(description: BUILD_RESULT, footer: 'success', webhookURL: WEBHOOK)
-             }
-    　　}
+
       }
     }
 
