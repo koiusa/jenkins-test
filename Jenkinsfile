@@ -6,6 +6,7 @@ pipeline {
     }
 
   }
+try{
   stages {
     stage('Build') {
       steps {
@@ -53,6 +54,14 @@ echo ${JOB_NAME}
     }
 
   }
+}
+  catch(error) {
+      stage('Error') {
+      steps {
+        discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: false)
+      }
+    }
+          }
   environment {
     PROJECT_NAME = '$JOB_NAME'
   }
