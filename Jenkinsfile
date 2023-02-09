@@ -48,13 +48,15 @@ python3 ./helloworld.py'''
 echo ${BUILD_URL}
 echo ${JOB_NAME}
 echo ${BUILD_STATUS}'''
-        post {
+      }
+      post {
         　　failure {
            　　 discordSend(description: BUILD_RESULT, footer: 'failure', webhookURL: WEBHOOK)
         　　　}
+            success {
+               discordSend(description: BUILD_RESULT, footer: 'success', webhookURL: WEBHOOK)
+            }
     　　}
-
-      }
     }
 
   }
