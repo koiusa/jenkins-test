@@ -45,12 +45,19 @@ python3 ./helloworld.py'''
     stage('Deploy') {
       steps {
         sh '''echo "Deploy" 
-#echo ${env.BUILD_URL}
-#echo ${currentBuild.currentResult}
-#echo ${JOB_NAME}'''
-        discordSend(description: BUILD_RESULT, footer: 'completed!', webhookURL: WEBHOOK)
+echo ${BUILD_URL}
+echo ${JOB_NAME}
+'''
       }
     }
 
   }
+  post { 
+        failure { 
+            discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: false)
+        }
+        success { 
+            discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: true)
+        }
+    }
 }
