@@ -62,6 +62,9 @@ echo ${JOB_NAME}
       }
     }
           }
+            finally {
+            echo '成功時も失敗時も実行されます'
+          }
   environment {
     PROJECT_NAME = '$JOB_NAME'
   }
