@@ -53,7 +53,6 @@ echo ${JOB_NAME}
     }
 
   }
-}
   environment {
     PROJECT_NAME = '$JOB_NAME'
   }
