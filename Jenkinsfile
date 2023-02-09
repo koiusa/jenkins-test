@@ -47,7 +47,9 @@ python3 ./helloworld.py'''
         sh '''echo "Deploy" 
 echo ${BUILD_URL}
 echo ${JOB_NAME}
-BUILD_STATUS=currentBuild.currentResult'''
+echo currentBuild.currentResult
+discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: true)
+'''
         discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: true)
       }
     }
