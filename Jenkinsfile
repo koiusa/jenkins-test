@@ -53,4 +53,9 @@ echo ${JOB_NAME}
     }
 
   }
+  post { 
+        always { 
+            discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: true)
+        }
+    }
 }
