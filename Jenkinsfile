@@ -1,63 +1,133 @@
 pipeline {
-  agent {
-    docker {
-      image 'python:3.6'
-      args '-u root:sudo'
-    }
+  agent none
 
-  }
   stages {
     stage('Build') {
+      agent {
+        docker {
+          image 'python:3.6'
+          args isUnix() ? '-u root' : ''
+        }
+      }
       steps {
-        sh '''echo "building"
-uname
-cat /etc/*release
+        script {
+          if (isUnix()) {
+            sh '''
+              echo "Building on Linux"
+              uname -a
+              cat /etc/*release
 
-apt-get update && apt-get install sudo
-cd app
-ls
-sudo pip install -r requirements.txt'''
+              apt-get update && apt-get install -y sudo
+              cd app
+              ls
+              sudo pip install -r requirements.txt
+            '''
+          } else {
+            bat '''
+              echo Building on Windows
+              ver
+              cd app
+              dir
+              python -m pip install -r requirements.txt
+            '''
+          }
+        }
       }
     }
 
     stage('Test') {
       parallel {
         stage('App') {
+          agent {
+            docker {
+              image 'python:3.6'
+              args isUnix() ? '-u root' : ''
+            }
+          }
           steps {
-            sh '''cd app
-ls
-python3 ./app.py
-'''
+            script {
+              if (isUnix()) {
+                sh '''
+                  cd app
+                  ls
+                  python3 ./app.py
+                '''
+              } else {
+                bat '''
+                  cd app
+                  dir
+                  python app.py
+                '''
+              }
+            }
           }
         }
 
         stage('HelloWorld') {
+          agent {
+            docker {
+              image 'python:3.6'
+              args isUnix() ? '-u root' : ''
+            }
+          }
           steps {
-            sh '''cd app
-ls
-python3 ./helloworld.py'''
+            script {
+              if (isUnix()) {
+                sh '''
+                  cd app
+                  ls
+                  python3 ./helloworld.py
+                '''
+              } else {
+                bat '''
+                  cd app
+                  dir
+                  python helloworld.py
+                '''
+              }
+            }
           }
         }
-
       }
     }
 
     stage('Deploy') {
       steps {
-        sh '''echo "Deploy" 
-echo ${BUILD_URL}
-echo ${JOB_NAME}
-'''
+        script {
+          if (isUnix()) {
+            sh '''
+              echo "Deploy on Linux"
+              echo ${BUILD_URL}
+              echo ${JOB_NAME}
+            '''
+          } else {
+            bat '''
+              echo Deploy on Windows
+              echo %BUILD_URL%
+              echo %JOB_NAME%
+            '''
+          }
+        }
       }
     }
-
   }
-  post { 
-        failure { 
-            discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: false)
-        }
-        success { 
-            discordSend(description: BUILD_RESULT, footer: currentBuild.currentResult, webhookURL: WEBHOOK, successful: true)
-        }
+
+  post {
+    failure {
+      discordSend(
+        description: BUILD_RESULT,
+        footer: currentBuild.currentResult,
+        webhookURL: WEBHOOK,
+        successful: false
+      )
     }
+    success {
+      discordSend(
+        description: BUILD_RESULT,
+        footer: currentBuild.currentResult,
+        webhookURL: WEBHOOK,
+        successful: true
+      )
+    }
+  }
 }
