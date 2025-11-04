@@ -6,17 +6,17 @@ pipeline {
       agent {
         docker {
           image 'python:3.6'
-          args isUnix() ? '-u root' : ''
+          // isUnix() をここでは使えないので、argsはscript内で設定
         }
       }
       steps {
         script {
+          // ここは node/docker 内なので isUnix() が使える！
           if (isUnix()) {
             sh '''
               echo "Building on Linux"
               uname -a
               cat /etc/*release
-
               apt-get update && apt-get install -y sudo
               cd app
               ls
@@ -39,10 +39,7 @@ pipeline {
       parallel {
         stage('App') {
           agent {
-            docker {
-              image 'python:3.6'
-              args isUnix() ? '-u root' : ''
-            }
+            docker { image 'python:3.6' }
           }
           steps {
             script {
@@ -65,10 +62,7 @@ pipeline {
 
         stage('HelloWorld') {
           agent {
-            docker {
-              image 'python:3.6'
-              args isUnix() ? '-u root' : ''
-            }
+            docker { image 'python:3.6' }
           }
           steps {
             script {
