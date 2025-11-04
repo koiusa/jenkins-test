@@ -1,10 +1,6 @@
 pipeline {
   agent none
 
-  environment {
-    DOCKER_HOST = 'tcp://localhost:2375'  // TCP経由で接続する場合
-  }
-
   stages {
     stage('Build') {
       agent {
