@@ -1,6 +1,10 @@
 pipeline {
   agent none
 
+  environment {
+    DOCKER_HOST = 'tcp://localhost:2375'  // TCP経由で接続する場合
+  }
+
   stages {
     stage('Build') {
       agent {
@@ -26,7 +30,6 @@ pipeline {
           } else {
             bat '''
               echo Building on Windows
-              set DOCKER_HOST = 'tcp://localhost:2375'
               ver
               cd app
               dir
