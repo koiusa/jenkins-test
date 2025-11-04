@@ -6,6 +6,7 @@ pipeline {
       agent {
         docker {
           image 'python:3.6'
+          args '-u root'
           // isUnix() をここでは使えないので、argsはscript内で設定
         }
       }
