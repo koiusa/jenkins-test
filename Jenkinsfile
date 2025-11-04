@@ -20,7 +20,7 @@ pipeline {
               apt-get update && apt-get install -y sudo
               cd app
               ls
-              sudo pip install -r requirements.txt
+              pip install -r requirements.txt
             '''
           } else {
             bat '''
