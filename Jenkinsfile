@@ -26,6 +26,7 @@ pipeline {
           } else {
             bat '''
               echo Building on Windows
+              set DOCKER_HOST = 'tcp://localhost:2375'
               ver
               cd app
               dir
